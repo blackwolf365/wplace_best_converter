@@ -1703,7 +1703,7 @@
 </head>
 <body>
   <div class="wrap">
-    <h1><a class="brand-self-link" href="" target="_blank" rel="noopener">Wplace Palette Studio</a> <span class="engine-badge">63 Colors · Oklab</span></h1>
+    <h1><a class="brand-self-link" href="" target="_blank" rel="noopener">Wplace Palette Studio</a> <span class="engine-badge">Oklab</span></h1>
 	<p class="subtitle">
 	Професійний локальний конвертер зображень у палітру <b>Wplace</b>. Точна адаптація кольорів у просторі <b>Oklab</b> із підтримкою смарт-дизерингу <b>Dizzy</b>. Усі обчислення виконуються у вашому браузері.
 	</p>
@@ -1717,6 +1717,18 @@
           <p class="small" style="margin: 6px 0 0;">Підтримується вставка з буфера: <b>Ctrl+V / Cmd+V</b></p>
           <p class="small" style="margin: 8px 0 0;">Офіційна палітра Wplace: <b>63 кольори</b></p>
         </div>
+		
+		<div class="control">
+			<label>
+				<span>Активна палітра</span>
+				<span class="value" id="paletteNameValue">Wplace</span>
+			</label>
+			<select id="paletteSelect" class="palette-select">
+				<option value="wplace" selected>Wplace (63 кольори)</option>
+				<option value="bplace">Bplace</option>
+				<!-- Нові палітри додаватимуться сюди -->
+			</select>
+		</div>
 
         <div class="control">
           <label>
@@ -1787,7 +1799,7 @@
           <div class="dither-help-row">
             <div class="small">
               <span id="ditherGeneralHint">Дизеринг змішує палітрові кольори візерунком або дифузією, щоб зробити переходи м’якшими.</span>
-              <span id="dizzyImprovedHint" hidden>Dizzy Dither поширює похибку в sRGB та вибирає палітрові кольори через Oklab. Dizzy Improved поширює похибку в linear RGB.</span>
+              <span id="dizzyImprovedHint" hidden>Dizzy Dither поширює похибку в sRGB та вибирає палітрові кольори через Oklab. Dizzy Experimental поширює похибку в linear RGB.</span>
             </div>
             <button
               class="dither-expand-toggle"
@@ -1965,7 +1977,26 @@
   <div id="floatingPalette" class="floating-palette hidden"></div>
 
   <script>
-    const PALETTE = [{"hex":"#000000","name":"black","rgb":[0,0,0]},{"hex":"#3C3C3C","name":"dark gray","rgb":[60,60,60]},{"hex":"#787878","name":"gray","rgb":[120,120,120]},{"hex":"#AAAAAA","name":"medium gray","rgb":[170,170,170]},{"hex":"#D2D2D2","name":"light gray","rgb":[210,210,210]},{"hex":"#FFFFFF","name":"white","rgb":[255,255,255]},{"hex":"#600018","name":"deep red","rgb":[96,0,24]},{"hex":"#A50E1E","name":"dark red","rgb":[165,14,30]},{"hex":"#ED1C24","name":"red","rgb":[237,28,36]},{"hex":"#FA8072","name":"light red","rgb":[250,128,114]},{"hex":"#E45C1A","name":"dark orange","rgb":[228,92,26]},{"hex":"#FF7F27","name":"orange","rgb":[255,127,39]},{"hex":"#F6AA09","name":"gold","rgb":[246,170,9]},{"hex":"#F9DD3B","name":"yellow","rgb":[249,221,59]},{"hex":"#FFFABC","name":"light yellow","rgb":[255,250,188]},{"hex":"#9C8431","name":"dark goldenrod","rgb":[156,132,49]},{"hex":"#C5AD31","name":"goldenrod","rgb":[197,173,49]},{"hex":"#E8D45F","name":"light goldenrod","rgb":[232,212,95]},{"hex":"#4A6B3A","name":"dark olive","rgb":[74,107,58]},{"hex":"#5A944A","name":"olive","rgb":[90,148,74]},{"hex":"#84C573","name":"light olive","rgb":[132,197,115]},{"hex":"#0EB968","name":"dark green","rgb":[14,185,104]},{"hex":"#13E67B","name":"green","rgb":[19,230,123]},{"hex":"#87FF5E","name":"light green","rgb":[135,255,94]},{"hex":"#0C816E","name":"dark teal","rgb":[12,129,110]},{"hex":"#10AEA6","name":"teal","rgb":[16,174,166]},{"hex":"#13E1BE","name":"light teal","rgb":[19,225,190]},{"hex":"#0F799F","name":"dark cyan","rgb":[15,121,159]},{"hex":"#60F7F2","name":"cyan","rgb":[96,247,242]},{"hex":"#BBFAF2","name":"light cyan","rgb":[187,250,242]},{"hex":"#28509E","name":"dark blue","rgb":[40,80,158]},{"hex":"#4093E4","name":"blue","rgb":[64,147,228]},{"hex":"#7DC7FF","name":"light blue","rgb":[125,199,255]},{"hex":"#4D31B8","name":"dark indigo","rgb":[77,49,184]},{"hex":"#6B50F6","name":"indigo","rgb":[107,80,246]},{"hex":"#99B1FB","name":"light indigo","rgb":[153,177,251]},{"hex":"#4A4284","name":"dark slate blue","rgb":[74,66,132]},{"hex":"#7A71C4","name":"slate blue","rgb":[122,113,196]},{"hex":"#B5AEF1","name":"light slate blue","rgb":[181,174,241]},{"hex":"#780C99","name":"dark purple","rgb":[120,12,153]},{"hex":"#AA38B9","name":"purple","rgb":[170,56,185]},{"hex":"#E09FF9","name":"light purple","rgb":[224,159,249]},{"hex":"#CB007A","name":"dark pink","rgb":[203,0,122]},{"hex":"#EC1F80","name":"pink","rgb":[236,31,128]},{"hex":"#F38DA9","name":"light pink","rgb":[243,141,169]},{"hex":"#9B5249","name":"dark peach","rgb":[155,82,73]},{"hex":"#D18078","name":"peach","rgb":[209,128,120]},{"hex":"#FAB6A4","name":"light peach","rgb":[250,182,164]},{"hex":"#684634","name":"dark brown","rgb":[104,70,52]},{"hex":"#95682A","name":"brown","rgb":[149,104,42]},{"hex":"#DBA463","name":"light brown","rgb":[219,164,99]},{"hex":"#7B6352","name":"dark tan","rgb":[123,99,82]},{"hex":"#9C846B","name":"tan","rgb":[156,132,107]},{"hex":"#D6B594","name":"light tan","rgb":[214,181,148]},{"hex":"#D18051","name":"dark beige","rgb":[209,128,81]},{"hex":"#F8B277","name":"beige","rgb":[248,178,119]},{"hex":"#FFC5A5","name":"light beige","rgb":[255,197,165]},{"hex":"#6D643F","name":"dark stone","rgb":[109,100,63]},{"hex":"#948C6B","name":"stone","rgb":[148,140,107]},{"hex":"#CDC59E","name":"light stone","rgb":[205,197,158]},{"hex":"#333941","name":"dark slate","rgb":[51,57,65]},{"hex":"#6D758D","name":"slate","rgb":[109,117,141]},{"hex":"#B3B9D1","name":"light slate","rgb":[179,185,209]}];
+    // Замість старого const PALETTE = [...]
+const PALETTES = {
+  wplace: {
+    id: 'wplace',
+    name: 'Wplace',
+    colors: [
+      {"hex":"#000000","name":"black","rgb":[0,0,0]},{"hex":"#3C3C3C","name":"dark gray","rgb":[60,60,60]},{"hex":"#787878","name":"gray","rgb":[120,120,120]},{"hex":"#AAAAAA","name":"medium gray","rgb":[170,170,170]},{"hex":"#D2D2D2","name":"light gray","rgb":[210,210,210]},{"hex":"#FFFFFF","name":"white","rgb":[255,255,255]},{"hex":"#600018","name":"deep red","rgb":[96,0,24]},{"hex":"#A50E1E","name":"dark red","rgb":[165,14,30]},{"hex":"#ED1C24","name":"red","rgb":[237,28,36]},{"hex":"#FA8072","name":"light red","rgb":[250,128,114]},{"hex":"#E45C1A","name":"dark orange","rgb":[228,92,26]},{"hex":"#FF7F27","name":"orange","rgb":[255,127,39]},{"hex":"#F6AA09","name":"gold","rgb":[246,170,9]},{"hex":"#F9DD3B","name":"yellow","rgb":[249,221,59]},{"hex":"#FFFABC","name":"light yellow","rgb":[255,250,188]},{"hex":"#9C8431","name":"dark goldenrod","rgb":[156,132,49]},{"hex":"#C5AD31","name":"goldenrod","rgb":[197,173,49]},{"hex":"#E8D45F","name":"light goldenrod","rgb":[232,212,95]},{"hex":"#4A6B3A","name":"dark olive","rgb":[74,107,58]},{"hex":"#5A944A","name":"olive","rgb":[90,148,74]},{"hex":"#84C573","name":"light olive","rgb":[132,197,115]},{"hex":"#0EB968","name":"dark green","rgb":[14,185,104]},{"hex":"#13E67B","name":"green","rgb":[19,230,123]},{"hex":"#87FF5E","name":"light green","rgb":[135,255,94]},{"hex":"#0C816E","name":"dark teal","rgb":[12,129,110]},{"hex":"#10AEA6","name":"teal","rgb":[16,174,166]},{"hex":"#13E1BE","name":"light teal","rgb":[19,225,190]},{"hex":"#0F799F","name":"dark cyan","rgb":[15,121,159]},{"hex":"#60F7F2","name":"cyan","rgb":[96,247,242]},{"hex":"#BBFAF2","name":"light cyan","rgb":[187,250,242]},{"hex":"#28509E","name":"dark blue","rgb":[40,80,158]},{"hex":"#4093E4","name":"blue","rgb":[64,147,228]},{"hex":"#7DC7FF","name":"light blue","rgb":[125,199,255]},{"hex":"#4D31B8","name":"dark indigo","rgb":[77,49,184]},{"hex":"#6B50F6","name":"indigo","rgb":[107,80,246]},{"hex":"#99B1FB","name":"light indigo","rgb":[153,177,251]},{"hex":"#4A4284","name":"dark slate blue","rgb":[74,66,132]},{"hex":"#7A71C4","name":"slate blue","rgb":[122,113,196]},{"hex":"#B5AEF1","name":"light slate blue","rgb":[181,174,241]},{"hex":"#780C99","name":"dark purple","rgb":[120,12,153]},{"hex":"#AA38B9","name":"purple","rgb":[170,56,185]},{"hex":"#E09FF9","name":"light purple","rgb":[224,159,249]},{"hex":"#CB007A","name":"dark pink","rgb":[203,0,122]},{"hex":"#EC1F80","name":"pink","rgb":[236,31,128]},{"hex":"#F38DA9","name":"light pink","rgb":[243,141,169]},{"hex":"#9B5249","name":"dark peach","rgb":[155,82,73]},{"hex":"#D18078","name":"peach","rgb":[209,128,120]},{"hex":"#FAB6A4","name":"light peach","rgb":[250,182,164]},{"hex":"#684634","name":"dark brown","rgb":[104,70,52]},{"hex":"#95682A","name":"brown","rgb":[149,104,42]},{"hex":"#DBA463","name":"light brown","rgb":[219,164,99]},{"hex":"#7B6352","name":"dark tan","rgb":[123,99,82]},{"hex":"#9C846B","name":"tan","rgb":[156,132,107]},{"hex":"#D6B594","name":"light tan","rgb":[214,181,148]},{"hex":"#D18051","name":"dark beige","rgb":[209,128,81]},{"hex":"#F8B277","name":"beige","rgb":[248,178,119]},{"hex":"#FFC5A5","name":"light beige","rgb":[255,197,165]},{"hex":"#6D643F","name":"dark stone","rgb":[109,100,63]},{"hex":"#948C6B","name":"stone","rgb":[148,140,107]},{"hex":"#CDC59E","name":"light stone","rgb":[205,197,158]},{"hex":"#333941","name":"dark slate","rgb":[51,57,65]},{"hex":"#6D758D","name":"slate","rgb":[109,117,141]},{"hex":"#B3B9D1","name":"light slate","rgb":[179,185,209]}
+		]
+	},
+  bplace: {
+    id: 'bplace',
+    name: 'Bplace',
+    colors: [
+		{"hex": "#000000", "name": "color_1", "rgb": [0, 0, 0]}, {"hex": "#3C3C3C", "name": "color_2", "rgb": [60, 60, 60]}, {"hex": "#787878", "name": "color_3", "rgb": [120, 120, 120]}, {"hex": "#AAAAAA", "name": "color_4", "rgb": [170, 170, 170]}, {"hex": "#D2D2D2", "name": "color_5", "rgb": [210, 210, 210]}, {"hex": "#FFFFFF", "name": "color_6", "rgb": [255, 255, 255]}, {"hex": "#600018", "name": "color_7", "rgb": [96, 0, 24]}, {"hex": "#A50E1E", "name": "color_8", "rgb": [165, 14, 30]}, {"hex": "#ED1C24", "name": "color_9", "rgb": [237, 28, 36]}, {"hex": "#FA8072", "name": "color_10", "rgb": [250, 128, 114]}, {"hex": "#E45C1A", "name": "color_11", "rgb": [228, 92, 26]}, {"hex": "#FF7F27", "name": "color_12", "rgb": [255, 127, 39]}, {"hex": "#F6AA09", "name": "color_13", "rgb": [246, 170, 9]}, {"hex": "#F9DD3B", "name": "color_14", "rgb": [249, 221, 59]}, {"hex": "#FFFABC", "name": "color_15", "rgb": [255, 250, 188]}, {"hex": "#9C8431", "name": "color_16", "rgb": [156, 132, 49]}, {"hex": "#C5AD31", "name": "color_17", "rgb": [197, 173, 49]}, {"hex": "#E8D45F", "name": "color_18", "rgb": [232, 212, 95]}, {"hex": "#4A6B3A", "name": "color_19", "rgb": [74, 107, 58]}, {"hex": "#5A944A", "name": "color_20", "rgb": [90, 148, 74]}, {"hex": "#84C573", "name": "color_21", "rgb": [132, 197, 115]}, {"hex": "#0EB968", "name": "color_22", "rgb": [14, 185, 104]}, {"hex": "#13E67B", "name": "color_23", "rgb": [19, 230, 123]}, {"hex": "#87FF5E", "name": "color_24", "rgb": [135, 255, 94]}, {"hex": "#0C816E", "name": "color_25", "rgb": [12, 129, 110]}, {"hex": "#10AEA6", "name": "color_26", "rgb": [16, 174, 166]}, {"hex": "#13E1BE", "name": "color_27", "rgb": [19, 225, 190]}, {"hex": "#0F799F", "name": "color_28", "rgb": [15, 121, 159]}, {"hex": "#60F7F2", "name": "color_29", "rgb": [96, 247, 242]}, {"hex": "#BBFAF2", "name": "color_30", "rgb": [187, 250, 242]}, {"hex": "#28509E", "name": "color_31", "rgb": [40, 80, 158]}, {"hex": "#4093E4", "name": "color_32", "rgb": [64, 147, 228]}, {"hex": "#7DC7FF", "name": "color_33", "rgb": [125, 199, 255]}, {"hex": "#4D31B8", "name": "color_34", "rgb": [77, 49, 184]}, {"hex": "#6B50F6", "name": "color_35", "rgb": [107, 80, 246]}, {"hex": "#99B1FB", "name": "color_36", "rgb": [153, 177, 251]}, {"hex": "#4A4284", "name": "color_37", "rgb": [74, 66, 132]}, {"hex": "#7A71C4", "name": "color_38", "rgb": [122, 113, 196]}, {"hex": "#B5AEF1", "name": "color_39", "rgb": [181, 174, 241]}, {"hex": "#780C99", "name": "color_40", "rgb": [120, 12, 153]}, {"hex": "#AA38B9", "name": "color_41", "rgb": [170, 56, 185]}, {"hex": "#E09FF9", "name": "color_42", "rgb": [224, 159, 249]}, {"hex": "#CB007A", "name": "color_43", "rgb": [203, 0, 122]}, {"hex": "#EC1F80", "name": "color_44", "rgb": [236, 31, 128]}, {"hex": "#F38DA9", "name": "color_45", "rgb": [243, 141, 169]}, {"hex": "#9B5249", "name": "color_46", "rgb": [155, 82, 73]}, {"hex": "#D18078", "name": "color_47", "rgb": [209, 128, 120]}, {"hex": "#FAB6A4", "name": "color_48", "rgb": [250, 182, 164]}, {"hex": "#684634", "name": "color_49", "rgb": [104, 70, 52]}, {"hex": "#95682A", "name": "color_50", "rgb": [149, 104, 42]}, {"hex": "#DBA463", "name": "color_51", "rgb": [219, 164, 99]}, {"hex": "#7B6352", "name": "color_52", "rgb": [123, 99, 82]}, {"hex": "#9C846B", "name": "color_53", "rgb": [156, 132, 107]}, {"hex": "#D6B594", "name": "color_54", "rgb": [214, 181, 148]}, {"hex": "#D18051", "name": "color_55", "rgb": [209, 128, 81]}, {"hex": "#F8B277", "name": "color_56", "rgb": [248, 178, 119]}, {"hex": "#FFC5A5", "name": "color_57", "rgb": [255, 197, 165]}, {"hex": "#6D643F", "name": "color_58", "rgb": [109, 100, 63]}, {"hex": "#948C6B", "name": "color_59", "rgb": [148, 140, 107]}, {"hex": "#CDC59E", "name": "color_60", "rgb": [205, 197, 158]}, {"hex": "#333941", "name": "color_61", "rgb": [51, 57, 65]}, {"hex": "#6D758D", "name": "color_62", "rgb": [109, 117, 141]}, {"hex": "#B3B9D1", "name": "color_63", "rgb": [179, 185, 209]}, {"hex": "#66CCFF", "name": "color_64", "rgb": [102, 204, 255]}, {"hex": "#5BBFB9", "name": "color_65", "rgb": [91, 191, 185]}, {"hex": "#800000", "name": "color_66", "rgb": [128, 0, 0]}, {"hex": "#DC143C", "name": "color_67", "rgb": [220, 20, 60]}, {"hex": "#FF7F50", "name": "color_68", "rgb": [255, 127, 80]}, {"hex": "#F0E68C", "name": "color_69", "rgb": [240, 230, 140]}, {"hex": "#FFDB58", "name": "color_70", "rgb": [255, 219, 88]}, {"hex": "#7FFF00", "name": "color_71", "rgb": [127, 255, 0]}, {"hex": "#BFFF00", "name": "color_72", "rgb": [191, 255, 0]}, {"hex": "#2E8B57", "name": "color_73", "rgb": [46, 139, 87]}, {"hex": "#40E0D0", "name": "color_74", "rgb": [64, 224, 208]}, {"hex": "#00FFFF", "name": "color_75", "rgb": [0, 255, 255]}, {"hex": "#87CEEB", "name": "color_76", "rgb": [135, 206, 235]}, {"hex": "#4169E1", "name": "color_77", "rgb": [65, 105, 225]}, {"hex": "#000080", "name": "color_78", "rgb": [0, 0, 128]}, {"hex": "#E6E6FA", "name": "color_79", "rgb": [230, 230, 250]}, {"hex": "#FF00FF", "name": "color_80", "rgb": [255, 0, 255]}, {"hex": "#FF77FF", "name": "color_81", "rgb": [255, 119, 255]}, {"hex": "#FFFFF0", "name": "color_82", "rgb": [255, 255, 240]}, {"hex": "#BDFCC9", "name": "color_83", "rgb": [189, 252, 201]}, {"hex": "#FF66CC", "name": "color_84", "rgb": [255, 102, 204]}, {"hex": "#924900", "name": "color_85", "rgb": [146, 73, 0]}, {"hex": "#800021", "name": "color_86", "rgb": [128, 0, 33]}, {"hex": "#FFBF00", "name": "color_87", "rgb": [255, 191, 0]}, {"hex": "#6B8E23", "name": "color_88", "rgb": [107, 142, 35]}, {"hex": "#CCCCFF", "name": "color_89", "rgb": [204, 204, 255]}, {"hex": "#2A52BE", "name": "color_90", "rgb": [42, 82, 190]}, {"hex": "#40826D", "name": "color_91", "rgb": [64, 130, 109]}, {"hex": "#E0B0FF", "name": "color_92", "rgb": [224, 176, 255]}, {"hex": "#704214", "name": "color_93", "rgb": [112, 66, 20]}, {"hex": "#000090", "name": "color_94", "rgb": [0, 0, 144]}
+			]
+  },
+};
+
+let currentPaletteKey = 'wplace';
+let PALETTE = PALETTES[currentPaletteKey].colors;
 
     const elements = {
       fileInput: document.getElementById('fileInput'),
@@ -2041,6 +2072,8 @@
       clusterSummary: document.getElementById('clusterSummary'),
       paletteSummary: document.getElementById('paletteSummary'),
       floatingPalette: document.getElementById('floatingPalette'),
+	  paletteSelect: document.getElementById('paletteSelect'),
+	  paletteNameValue: document.getElementById('paletteNameValue'),
     };
 
     const originalCtx = elements.originalCanvas.getContext('2d', { willReadFrequently: true });
@@ -2068,7 +2101,7 @@
     originalCtx.imageSmoothingEnabled = false;
     resultCtx.imageSmoothingEnabled = false;
 
-    const palettePrepared = PALETTE.map((p, idx) => {
+    let palettePrepared = PALETTE.map((p, idx) => {
       const [r, g, b] = p.rgb;
       const linear = [srgbToLinear(r), srgbToLinear(g), srgbToLinear(b)];
       return { ...p, idx, linear, oklab: linearRgbToOklab(linear[0], linear[1], linear[2]) };
@@ -2738,7 +2771,7 @@
       if (expanded && !improvedOption) {
         improvedOption = document.createElement('option');
         improvedOption.value = 'dizzy-improved';
-        improvedOption.textContent = '🔥 Dizzy Improved (Linear RGB)';
+        improvedOption.textContent = '🔥 Dizzy Experimental (Linear RGB)';
         const classicOption = select.querySelector('option[value="dizzy-classic"]');
         if (classicOption) classicOption.insertAdjacentElement('afterend', improvedOption);
         else select.appendChild(improvedOption);
@@ -4333,7 +4366,7 @@
       return chromaA - chromaB;
     }
 
-    const paletteForPicker = [...palettePrepared].sort(paletteGradientComparator);
+    let paletteForPicker = [...palettePrepared].sort(paletteGradientComparator);
 
     function buildPaletteGrid(selectedHex) {
       return paletteForPicker.map(color => {
@@ -5703,6 +5736,62 @@
       if (event.key === 'Enter') elements.pageZoomValue.blur();
     });
 
+	function switchPalette(paletteKey) {
+      if (!PALETTES[paletteKey] || !PALETTES[paletteKey].colors.length) return;
+      currentPaletteKey = paletteKey;
+      PALETTE = PALETTES[paletteKey].colors;
+
+      // 1. Перераховуємо Oklab-простір для нової палітри
+      palettePrepared = PALETTE.map((p, idx) => {
+        const [r, g, b] = p.rgb;
+        const linear = [srgbToLinear(r), srgbToLinear(g), srgbToLinear(b)];
+        return { ...p, idx, linear, oklab: linearRgbToOklab(linear[0], linear[1], linear[2]) };
+      });
+
+      // 2. Оновлюємо відсортовану палітру для вікна вибору кольору
+      paletteForPicker = [...palettePrepared].sort(paletteGradientComparator);
+
+      // 3. Оновлюємо слайдер max-кольоорів під розмір нової палітри
+      if (elements.maxColorsRange) {
+        elements.maxColorsRange.max = String(PALETTE.length);
+        elements.maxColorsRange.value = String(PALETTE.length);
+        if (elements.maxColorsValue) {
+          elements.maxColorsValue.textContent = String(PALETTE.length);
+        }
+      }
+
+      // 4. Очищаємо кеш ручних замін
+      resultColorOverrides.clear();
+      resultColorClusterCache.clear();
+
+      // 5. Перемальовуємо картинку під нову палітру
+      if (sourceImageData) {
+        processImage();
+      }
+    }
+
+    if (elements.paletteSelect) {
+      elements.paletteSelect.addEventListener('change', (e) => {
+        const selectedKey = e.target.value;
+        if (elements.paletteNameValue && PALETTES[selectedKey]) {
+          elements.paletteNameValue.textContent = PALETTES[selectedKey].name;
+        }
+        switchPalette(selectedKey);
+      });
+    }
+
+	  if (elements.paletteSelect) {
+    elements.paletteSelect.addEventListener('change', (e) => {
+      if (elements.paletteNameValue) {
+        const selectedOption = e.target.options[e.target.selectedIndex];
+        elements.paletteNameValue.textContent = selectedOption.text.split(' ')[0];
+      }
+      if (sourceImageData) {
+        processImage();
+      }
+    });
+	}
+	
     setupStickyControlsShell();
     setupFriendlyLayout();
     setupRangeSteppers();
