@@ -2521,8 +2521,8 @@ let PALETTE = PALETTES[currentPaletteKey].colors;
     function setDefaultLayoutState() {
       // Equal visual widths on first launch: half of the available space
       // after subtracting the 18px resize handle between the panes.
-      document.documentElement.style.setProperty('--split-original-width', 'calc((100% - 18px) / 2)');
-      document.documentElement.style.setProperty('--canvas-stage-height', '340px');
+      document.documentElement.style.setProperty('--split-original-width', '24%');
+      document.documentElement.style.setProperty('--canvas-stage-height', '550px');
     }
 
     function setOriginalVisibility(visible) {
