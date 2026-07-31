@@ -2998,8 +2998,6 @@ let PALETTE = PALETTES[currentPaletteKey].colors;
       setPixelReadout(pixel[0], pixel[1], pixel[2], x, y, pixel[3]);
     }
 
-let resultPanState = null;
-
     function beginResultPan(event) {
       if (event.button !== 0 || !elements.resultCanvasWrap) return; // Регулюємо тільки ЛКМ
 
