@@ -1732,8 +1732,8 @@
 				<option value="wplace">Wplace (63 кольори)</option>
 				<option value="bplace">Bplace</option>
 				<option value="minecraft">Minecraft</option>
-				<option value="minecraft" selected>8-Bit</option>
-				<option value="minecraft" selected>8-Bit (Біологічна)</option>
+				<option value="8-Bit" selected>8-Bit</option>
+				<option value="8-Bit (Біологічна)" selected>8-Bit (Біологічна)</option>
 				<!-- Нові палітри додаватимуться сюди -->
 			</select>
 		</div>
@@ -5835,17 +5835,15 @@ let PALETTE = PALETTES[currentPaletteKey].colors;
       });
     }
 
-	  if (elements.paletteSelect) {
-    elements.paletteSelect.addEventListener('change', (e) => {
-      if (elements.paletteNameValue) {
-        const selectedOption = e.target.options[e.target.selectedIndex];
-        elements.paletteNameValue.textContent = selectedOption.text.split(' ')[0];
-      }
-      if (sourceImageData) {
-        processImage();
-      }
-    });
-	}
+if (elements.paletteSelect) {
+      elements.paletteSelect.addEventListener('change', (e) => {
+        const selectedKey = e.target.value;
+        if (elements.paletteNameValue && PALETTES[selectedKey]) {
+          elements.paletteNameValue.textContent = PALETTES[selectedKey].name;
+        }
+        switchPalette(selectedKey);
+      });
+    }
 	
     setupStickyControlsShell();
     setupFriendlyLayout();
