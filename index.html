@@ -1726,13 +1726,13 @@
 		<div class="control">
 			<label>
 				<span>Активна палітра</span>
-				<span class="value" id="paletteNameValue">Wplace</span>
+				<span class="value" id="paletteNameValue">8-Bit</span>
 			</label>
 			<select id="paletteSelect" class="palette-select">
-				<option value="wplace" selected>Wplace (63 кольори)</option>
+				<option value="wplace">Wplace (63 кольори)</option>
 				<option value="bplace">Bplace</option>
 				<option value="minecraft">Minecraft</option>
-				<option value="minecraft">8-Bit</option>
+				<option value="minecraft" selected>8-Bit</option>
 				<!-- Нові палітри додаватимуться сюди -->
 			</select>
 		</div>
@@ -2016,7 +2016,7 @@ const PALETTES = {
   }
 	};
 
-let currentPaletteKey = 'wplace';
+let currentPaletteKey = '8-Bit';
 let PALETTE = PALETTES[currentPaletteKey].colors;
 
     const elements = {
